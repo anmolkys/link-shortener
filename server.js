@@ -8,7 +8,7 @@ const { default: mongoose } = require("mongoose");
 app.use(express.json());
 app.use(cors());
 const Port=5000
-mongoose.connect("mongodb+srv://krisiscool433:kKJhzHPqEMQZHER6@cluster0.0krqcac.mongodb.net/?retryWrites=true&w=majority").then(()=>{console.log("DB connected")});
+mongoose.connect("DB URI").then(()=>{console.log("DB connected")});
 
 app.post("/i",async (req,res)=>{
     const longURL=await req.body?.longURL;
