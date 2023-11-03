@@ -3,12 +3,14 @@ const app = express()
 const http = require("http").createServer(app);
 const cors = require("cors");
 const Link = require("./models/link");
+require('dotenv').config()
 const { default: mongoose } = require("mongoose");
 
 app.use(express.json());
 app.use(cors());
+app.use(express.static('public'))
 const Port=5000
-mongoose.connect("DB URI").then(()=>{console.log("DB connected")});
+mongoose.connect(process.env.URI).then(()=>{console.log("DB connected")});
 
 app.post("/i",async (req,res)=>{
     const longURL=await req.body?.longURL;
@@ -32,4 +34,8 @@ app.get("/i/:short",async (req,res)=>{
     res.status(301).redirect(link.longURL);
     
 })
+
+
+
+
 http.listen(process.env.PORT || Port ,()=>{console.log(`Listening on ${Port}`)})
